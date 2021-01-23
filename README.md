@@ -32,6 +32,16 @@
 - Don't forget to configure all dependencies to use vue.js;
 - There are some comments throughout the code to explain some functions
 
+## GET STARTED!
+
+- 1- git clone the repository where you want in your PC (You need GIT installed in your PC / Command: git clone https://github.com/EraldoAV/gamblingTest.git);
+- 2- folder 'gamblingTest' will be created in your PC;
+- 3- inside the 'gamblingTest' folder, create (or copy) one .env file (laravel);
+- 4- in 'gamblingTest' directory (in your PC) run the code: npm install (you need node.js installed in your PC);
+- 5- in 'gamblingTest' directory (in your PC) run the code: composer install (you need composer installed in your PC);
+- 6- Now, you can run a server localhost to test the application using the code: php artisan serve , in 'gamblingTest' directory;
+- 7- Have fun;
+
 ## Test Description:
 
 KaxMedia Dev Code Test
