@@ -1880,25 +1880,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  template: "\n    <div>\n        <div class=\"container\">\n            <div class=\"row justify-content-center\">\n                <div class=\"col-md-8\">\n                    <div class=\"card card-margin\">\n                        <div class=\"card-header\">\n                            <div class=\"row\">\n                                <div class=\"col-md-6\">\n                                    <span class=\"span-list-all\">List - All</span>\n                                </div>\n                                <div class=\"col-md-6\">\n                                    <button v-on:click=\"calculateDist\" type=\"button\" class=\"btn btn-success button-list-all\">Calculate Distance</button>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"card-body table-all-list\">\n                            <table class=\"table\">\n                                <thead>\n                                    <tr>\n                                        <th scope=\"col\">#</th>\n                                        <th scope=\"col\">ID</th>\n                                        <th scope=\"col\">Name</th>\n                                        <th scope=\"col\">Latitude</th>\n                                        <th scope=\"col\">Longitude</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr v-for=\"(item, index) in orderedUsers\">\n                                        <th scope=\"row\">{{index+1}}</th>\n                                        <th scope=\"row\">{{item.affiliate_id}}</th>\n                                        <td>{{item.name}}</td>\n                                        <td>{{item.latitude}}</td>\n                                        <td>{{item.longitude}}</td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div v-if=\"!isHidden\" class=\"container\">\n            <div class=\"row justify-content-center\">\n                <div class=\"col-md-8\">\n                    <div class=\"card card-margin\">\n                        <div class=\"card-header\">\n                            <div class=\"row\">\n                                <div class=\"col-md-12\">\n                                    <span class=\"span-list-all\">List - Only < 100 Km - INVITE THEM!</span>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"card-body table-all-list\">\n                            <table class=\"table\">\n                                <thead>\n                                    <tr>\n                                        <th scope=\"col\">#</th>\n                                        <th scope=\"col\">ID</th>\n                                        <th scope=\"col\">Name</th>\n                                        <th scope=\"col\">Distance</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr v-for=\"(item, index) in orderedDist\">\n                                        <th scope=\"row\">{{index+1}}</th>\n                                        <th scope=\"row\">{{item.id}}</th>\n                                        <td>{{item.name}}</td>\n                                        <td>{{item.distance}} Km</td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    ",
+  props: ['data'],
+  data: function data() {
+    return {
+      objArray: this.data,
+      distArray: [],
+      isHidden: true
+    };
+  },
+  computed: {
+    orderedUsers: function orderedUsers() {
+      return _.orderBy(this.data, 'affiliate_id');
+    },
+    orderedDist: function orderedDist() {
+      return _.orderBy(this.distArray, 'id');
+    }
+  },
+  mounted: function mounted() {//console.log(this.data)
+  },
+  methods: {
+    calculateDist: function calculateDist() {
+      var vm = this;
+      vm.distArray.splice(0);
+      axios.post('/calculateDist', {
+        data: this.data
+      }).then(function (response) {
+        $.each(response.data, function (key, value) {
+          vm.distArray.push({
+            'id': value.id,
+            'name': value.name,
+            'distance': value.distance
+          });
+        });
+      });
+      vm.isHidden = false;
+    }
   }
 });
 
@@ -37362,20 +37380,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _list_vue_vue_type_template_id_200b772e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list.vue?vue&type=template&id=200b772e& */ "./resources/js/components/list.vue?vue&type=template&id=200b772e&");
-/* harmony import */ var _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list.vue?vue&type=script&lang=js& */ "./resources/js/components/list.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
+/* harmony import */ var _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./list.vue?vue&type=script&lang=js& */ "./resources/js/components/list.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+;
 
 
 
 /* normalize component */
 ;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _list_vue_vue_type_template_id_200b772e___WEBPACK_IMPORTED_MODULE_0__.render,
-  _list_vue_vue_type_template_id_200b772e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__.default)(
+  _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default,
+  render,
+  staticRenderFns,
   false,
   null,
   null,
@@ -37439,75 +37456,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/list.vue?vue&type=template&id=200b772e&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/list.vue?vue&type=template&id=200b772e& ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_200b772e___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_200b772e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_200b772e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./list.vue?vue&type=template&id=200b772e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/list.vue?vue&type=template&id=200b772e&");
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
   \****************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* binding */ render,
-/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/list.vue?vue&type=template&id=200b772e&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/list.vue?vue&type=template&id=200b772e& ***!
-  \****************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

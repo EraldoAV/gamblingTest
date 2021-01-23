@@ -6,3 +6,26 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.table-all-list{
+    overflow: auto;
+    height: 259px;
+    padding-bottom:20px;
+}
+
+.card-margin{
+    margin-top: 20px;
+}
+
+.span-list-all{
+    display: block;
+    margin-top: 2%;
+}
+
+.button-list-all{
+    float: right;
+}
+
+.hidden{
+    display: none;
+}

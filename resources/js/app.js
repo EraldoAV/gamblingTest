@@ -29,5 +29,5 @@ Vue.component('list', require('./components/list.vue').default);
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });
